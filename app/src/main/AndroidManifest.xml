@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        -->
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
@@ -33,6 +43,72 @@
             android:name=".AdminDashboardActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".AdminProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".NewOrdersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CustomerDashboardActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PlaceOrderActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CustomerOrdersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CustomerProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".AdminOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCustomersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMonthlyBillsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPaymentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminNotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerNotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MonthlyPackageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyMonthlyPackageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeliveryCalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerCurrentBillActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerBillHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeliveryManLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeliveryManDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeliveryManOrdersActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Month: 2026-10"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textColor="#222222" />
+
+        <TextView
+            android:id="@+id/tvDeliveredDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delivered Days: 28"
+            android:textSize="15sp"
+            android:textColor="#555555"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount: ₹1680.00"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1976D2"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/tvPaymentStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Payment: Pending"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#F57C00"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvBillStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bill: Generated"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#388E3C"
+            android:layout_marginTop="6dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

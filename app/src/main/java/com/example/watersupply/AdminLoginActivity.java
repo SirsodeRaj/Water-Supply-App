@@ -1,6 +1,7 @@
 package com.example.watersupply;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
@@ -30,21 +31,26 @@ public class AdminLoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
+    private SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_admin_login);
 
-        // Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // UI
+        prefs = getSharedPreferences(
+                "WaterSupplyPrefs",
+                MODE_PRIVATE
+        );
+
         etAdminEmail = findViewById(R.id.etAdminEmail);
         etAdminPassword = findViewById(R.id.etAdminPassword);
 
         cbAdminRememberMe = findViewById(R.id.cbAdminRememberMe);
-
         btnAdminLogin = findViewById(R.id.btnAdminLogin);
 
         tvAdminForgotPassword =
@@ -52,158 +58,244 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         btnBack = findViewById(R.id.btnBack);
 
-        // Password show/hide
+        // Password eye button
         setupPasswordEye(etAdminPassword);
 
-        // Admin Login
-        btnAdminLogin.setOnClickListener(v -> loginAdmin());
+        // Restore saved credentials
+        loadRememberedCredentials();
 
-        // Forgot Password
+        // Login
+        btnAdminLogin.setOnClickListener(
+                v -> loginAdmin()
+        );
+
+        // Forgot password
         tvAdminForgotPassword.setOnClickListener(
                 v -> resetAdminPassword()
         );
 
         // Back
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(
+                v -> finish()
+        );
+    }
+
+    private void loadRememberedCredentials() {
+
+        boolean rememberMe =
+                prefs.getBoolean(
+                        "adminRememberMe",
+                        false
+                );
+
+        if (rememberMe) {
+
+            String savedEmail =
+                    prefs.getString(
+                            "adminEmail",
+                            ""
+                    );
+
+            String savedPassword =
+                    prefs.getString(
+                            "adminPassword",
+                            ""
+                    );
+
+            etAdminEmail.setText(savedEmail);
+            etAdminPassword.setText(savedPassword);
+
+            cbAdminRememberMe.setChecked(true);
+        }
     }
 
     private void loginAdmin() {
 
         String email =
-                etAdminEmail.getText().toString().trim();
+                etAdminEmail.getText()
+                        .toString()
+                        .trim();
 
         String password =
-                etAdminPassword.getText().toString();
+                etAdminPassword.getText()
+                        .toString();
 
         if (email.isEmpty()) {
-            etAdminEmail.setError("Enter admin email");
+
+            etAdminEmail.setError(
+                    "Enter admin email"
+            );
+
             etAdminEmail.requestFocus();
+
             return;
         }
 
         if (password.isEmpty()) {
-            etAdminPassword.setError("Enter password");
+
+            etAdminPassword.setError(
+                    "Enter password"
+            );
+
             etAdminPassword.requestFocus();
+
             return;
         }
 
         btnAdminLogin.setEnabled(false);
         btnAdminLogin.setText("LOGGING IN...");
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
+        mAuth.signInWithEmailAndPassword(
+                        email,
+                        password
+                )
+                .addOnCompleteListener(
+                        this,
+                        task -> {
 
-                    if (!task.isSuccessful()) {
+                            if (!task.isSuccessful()) {
 
-                        btnAdminLogin.setEnabled(true);
-                        btnAdminLogin.setText("ADMIN LOGIN");
-
-                        Toast.makeText(
-                                AdminLoginActivity.this,
-                                "Invalid admin email or password.",
-                                Toast.LENGTH_LONG
-                        ).show();
-
-                        return;
-                    }
-
-                    if (mAuth.getCurrentUser() == null) {
-
-                        btnAdminLogin.setEnabled(true);
-                        btnAdminLogin.setText("ADMIN LOGIN");
-
-                        Toast.makeText(
-                                AdminLoginActivity.this,
-                                "Unable to verify account.",
-                                Toast.LENGTH_LONG
-                        ).show();
-
-                        return;
-                    }
-
-                    String uid =
-                            mAuth.getCurrentUser().getUid();
-
-                    // Check user's role
-                    db.collection("users")
-                            .document(uid)
-                            .get()
-                            .addOnSuccessListener(documentSnapshot -> {
-
-                                if (!documentSnapshot.exists()) {
-
-                                    mAuth.signOut();
-
-                                    showLoginError(
-                                            "Admin profile not found."
-                                    );
-
-                                    return;
-                                }
-
-                                String role =
-                                        documentSnapshot.getString("role");
-
-                                if ("admin".equals(role)) {
-
-                                    // Remember Me
-                                    getSharedPreferences(
-                                            "WaterSupplyPrefs",
-                                            MODE_PRIVATE
-                                    )
-                                            .edit()
-                                            .putBoolean(
-                                                    "adminRememberMe",
-                                                    cbAdminRememberMe.isChecked()
-                                            )
-                                            .apply();
-
-                                    Toast.makeText(
-                                            AdminLoginActivity.this,
-                                            "Login successful!",
-                                            Toast.LENGTH_SHORT
-                                    ).show();
-
-                                    Intent intent =
-                                            new Intent(
-                                                    AdminLoginActivity.this,
-                                                    AdminDashboardActivity.class
-                                            );
-
-                                    intent.addFlags(
-                                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                                    Intent.FLAG_ACTIVITY_NEW_TASK |
-                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    );
-
-                                    startActivity(intent);
-                                    finish();
-
-                                } else {
-
-                                    // Not an admin
-                                    mAuth.signOut();
-
-                                    showLoginError(
-                                            "Access denied. Admin account required."
-                                    );
-                                }
-                            })
-                            .addOnFailureListener(e -> {
-
-                                mAuth.signOut();
-
-                                showLoginError(
-                                        "Unable to verify admin account."
+                                btnAdminLogin.setEnabled(true);
+                                btnAdminLogin.setText(
+                                        "ADMIN LOGIN"
                                 );
-                            });
-                });
+
+                                Toast.makeText(
+                                        AdminLoginActivity.this,
+                                        "Invalid admin email or password.",
+                                        Toast.LENGTH_LONG
+                                ).show();
+
+                                return;
+                            }
+
+                            if (mAuth.getCurrentUser() == null) {
+
+                                showError(
+                                        "Unable to verify account."
+                                );
+
+                                return;
+                            }
+
+                            String uid =
+                                    mAuth.getCurrentUser()
+                                            .getUid();
+
+                            // Check admin profile
+                            db.collection("users")
+                                    .document(uid)
+                                    .get()
+                                    .addOnSuccessListener(
+                                            document -> {
+
+                                                if (!document.exists()) {
+
+                                                    mAuth.signOut();
+
+                                                    showError(
+                                                            "Admin profile not found."
+                                                    );
+
+                                                    return;
+                                                }
+
+                                                String role =
+                                                        document.getString(
+                                                                "role"
+                                                        );
+
+                                                if ("admin".equals(role)) {
+
+                                                    saveRememberedCredentials(
+                                                            email,
+                                                            password
+                                                    );
+
+                                                    Toast.makeText(
+                                                            AdminLoginActivity.this,
+                                                            "Login successful!",
+                                                            Toast.LENGTH_SHORT
+                                                    ).show();
+
+                                                    Intent intent =
+                                                            new Intent(
+                                                                    AdminLoginActivity.this,
+                                                                    AdminDashboardActivity.class
+                                                            );
+
+                                                    intent.addFlags(
+                                                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                                                    Intent.FLAG_ACTIVITY_NEW_TASK |
+                                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                    );
+
+                                                    startActivity(intent);
+
+                                                    finish();
+
+                                                } else {
+
+                                                    mAuth.signOut();
+
+                                                    showError(
+                                                            "Access denied. Admin account required."
+                                                    );
+                                                }
+                                            }
+                                    )
+                                    .addOnFailureListener(
+                                            e -> {
+
+                                                mAuth.signOut();
+
+                                                showError(
+                                                        "Unable to verify admin account."
+                                                );
+                                            }
+                                    );
+                        }
+                );
+    }
+
+    private void saveRememberedCredentials(
+            String email,
+            String password
+    ) {
+
+        if (cbAdminRememberMe.isChecked()) {
+
+            prefs.edit()
+                    .putBoolean(
+                            "adminRememberMe",
+                            true
+                    )
+                    .putString(
+                            "adminEmail",
+                            email
+                    )
+                    .putString(
+                            "adminPassword",
+                            password
+                    )
+                    .apply();
+
+        } else {
+
+            prefs.edit()
+                    .remove("adminRememberMe")
+                    .remove("adminEmail")
+                    .remove("adminPassword")
+                    .apply();
+        }
     }
 
     private void resetAdminPassword() {
 
         String email =
-                etAdminEmail.getText().toString().trim();
+                etAdminEmail.getText()
+                        .toString()
+                        .trim();
 
         if (email.isEmpty()) {
 
@@ -217,26 +309,29 @@ public class AdminLoginActivity extends AppCompatActivity {
         }
 
         mAuth.sendPasswordResetEmail(email)
-                .addOnSuccessListener(unused -> {
+                .addOnSuccessListener(
+                        unused -> {
 
-                    Toast.makeText(
-                            AdminLoginActivity.this,
-                            "Password reset email sent!",
-                            Toast.LENGTH_LONG
-                    ).show();
+                            Toast.makeText(
+                                    AdminLoginActivity.this,
+                                    "Password reset email sent!",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                )
+                .addOnFailureListener(
+                        e -> {
 
-                })
-                .addOnFailureListener(e -> {
-
-                    Toast.makeText(
-                            AdminLoginActivity.this,
-                            "Unable to send password reset email.",
-                            Toast.LENGTH_LONG
-                    ).show();
-                });
+                            Toast.makeText(
+                                    AdminLoginActivity.this,
+                                    "Unable to send password reset email.",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                );
     }
 
-    private void showLoginError(String message) {
+    private void showError(String message) {
 
         btnAdminLogin.setEnabled(true);
         btnAdminLogin.setText("ADMIN LOGIN");
@@ -248,45 +343,57 @@ public class AdminLoginActivity extends AppCompatActivity {
         ).show();
     }
 
-    private void setupPasswordEye(EditText passwordField) {
+    private void setupPasswordEye(
+            EditText passwordField
+    ) {
 
-        passwordField.setOnTouchListener((v, event) -> {
+        passwordField.setOnTouchListener(
+                (v, event) -> {
 
-            if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getAction()
+                            == MotionEvent.ACTION_UP) {
 
-                int drawableWidth =
-                        passwordField
-                                .getCompoundDrawables()[2]
-                                .getBounds()
-                                .width();
+                        int drawableWidth =
+                                passwordField
+                                        .getCompoundDrawables()[2]
+                                        .getBounds()
+                                        .width();
 
-                if (event.getX() >=
-                        passwordField.getWidth()
-                                - passwordField.getPaddingEnd()
-                                - drawableWidth) {
+                        if (event.getX() >=
+                                passwordField.getWidth()
+                                        - passwordField.getPaddingEnd()
+                                        - drawableWidth) {
 
-                    if (passwordField.getTransformationMethod()
-                            instanceof PasswordTransformationMethod) {
+                            if (passwordField
+                                    .getTransformationMethod()
+                                    instanceof PasswordTransformationMethod) {
 
-                        passwordField.setTransformationMethod(null);
+                                passwordField
+                                        .setTransformationMethod(
+                                                null
+                                        );
 
-                    } else {
+                            } else {
 
-                        passwordField.setTransformationMethod(
-                                PasswordTransformationMethod
-                                        .getInstance()
-                        );
+                                passwordField
+                                        .setTransformationMethod(
+                                                PasswordTransformationMethod
+                                                        .getInstance()
+                                        );
+                            }
+
+                            passwordField.setSelection(
+                                    passwordField
+                                            .getText()
+                                            .length()
+                            );
+
+                            return true;
+                        }
                     }
 
-                    passwordField.setSelection(
-                            passwordField.getText().length()
-                    );
-
-                    return true;
+                    return false;
                 }
-            }
-
-            return false;
-        });
+        );
     }
 }

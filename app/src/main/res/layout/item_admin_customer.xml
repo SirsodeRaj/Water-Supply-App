@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginBottom="14dp"
+
+    app:cardCornerRadius="14dp"
+    app:cardElevation="4dp">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:padding="16dp">
+
+
+        <!-- CUSTOMER NAME -->
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Raj Sirsode"
+
+            android:textSize="19sp"
+
+            android:textStyle="bold"
+
+            android:textColor="#222222" />
+
+
+        <!-- EMAIL -->
+
+        <TextView
+            android:id="@+id/tvEmail"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Email: raj@example.com"
+
+            android:textSize="14sp"
+
+            android:textColor="#555555"
+
+            android:layout_marginTop="7dp" />
+
+
+        <!-- PHONE -->
+
+        <TextView
+            android:id="@+id/tvPhone"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Phone: 9876543210"
+
+            android:textSize="14sp"
+
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <!-- ADDRESS -->
+
+        <TextView
+            android:id="@+id/tvAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Address: Customer Address"
+
+            android:textSize="14sp"
+
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <!-- ACCOUNT TYPE -->
+
+        <TextView
+            android:id="@+id/tvAccountType"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Account Type: customer"
+
+            android:textSize="14sp"
+
+            android:textStyle="bold"
+
+            android:textColor="#1976D2"
+
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

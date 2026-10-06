@@ -1,10 +1,407 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminDashboardActivity">
+    android:background="#F5F7FA">
+
+
+    <!-- ==========================================
+         TOP BAR
+         ========================================== -->
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="12dp"
+        android:background="#1976D2"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <!-- TITLE -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Water Supply"
+                android:textColor="#FFFFFF"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Dashboard"
+                android:textColor="#E3F2FD"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+
+        <!-- ======================================
+             NOTIFICATION
+             ====================================== -->
+
+        <ImageButton
+            android:id="@+id/btnNotifications"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Notifications"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#FFFFFF" />
+
+
+        <!-- ======================================
+             PROFILE
+             ====================================== -->
+
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Profile"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:tint="#FFFFFF" />
+
+    </LinearLayout>
+
+
+    <!-- ==========================================
+         WELCOME
+         ========================================== -->
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Admin 👋"
+        android:textColor="#222222"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="25dp" />
+
+
+    <!-- ==========================================
+         DASHBOARD
+         ========================================== -->
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:fillViewport="true"
+
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginTop="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="25dp">
+
+
+            <!-- ======================================
+                 NEW ORDERS
+                 ====================================== -->
+
+            <LinearLayout
+                android:id="@+id/cardNewOrders"
+
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="15dp"
+
+                android:background="#FFFFFF"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?attr/selectableItemBackground">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📦"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Orders"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvNewOrders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="#1976D2" />
+
+            </LinearLayout>
+
+
+            <!-- ======================================
+                 CUSTOMERS
+                 ====================================== -->
+
+            <LinearLayout
+                android:id="@+id/cardCustomers"
+
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="15dp"
+
+                android:background="#FFFFFF"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?attr/selectableItemBackground"
+
+                android:layout_marginTop="15dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👥"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customers"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvCustomers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="#1976D2" />
+
+            </LinearLayout>
+
+
+            <!-- ======================================
+                 ORDERS
+                 ====================================== -->
+
+            <LinearLayout
+                android:id="@+id/cardOrders"
+
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="15dp"
+
+                android:background="#FFFFFF"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?attr/selectableItemBackground"
+
+                android:layout_marginTop="15dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🚚"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orders"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvOrders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="#1976D2" />
+
+            </LinearLayout>
+
+
+            <!-- ======================================
+                 MONTHLY BILLS
+                 ====================================== -->
+
+            <LinearLayout
+                android:id="@+id/cardBills"
+
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="15dp"
+
+                android:background="#FFFFFF"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?attr/selectableItemBackground"
+
+                android:layout_marginTop="15dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🧾"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly Bills"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvBills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="#1976D2" />
+
+            </LinearLayout>
+
+
+            <!-- ======================================
+                 PAYMENTS
+                 ====================================== -->
+
+            <LinearLayout
+                android:id="@+id/cardPayments"
+
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="15dp"
+
+                android:background="#FFFFFF"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                android:foreground="?attr/selectableItemBackground"
+
+                android:layout_marginTop="15dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payments"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvPayments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹0"
+                    android:textSize="14sp"
+                    android:textColor="#1976D2" />
+
+            </LinearLayout>
+
+
+            <!-- ======================================
+                 DEVELOPER
+                 ====================================== -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Developed by Raj Sirsode"
+
+                android:textSize="13sp"
+                android:textColor="#777777"
+
+                android:layout_gravity="center"
+
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="25dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginBottom="14dp"
+
+    app:cardCornerRadius="14dp"
+    app:cardElevation="4dp">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/tvOrderId"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Order ID: #12345"
+
+            android:textSize="13sp"
+            android:textColor="#777777" />
+
+
+        <TextView
+            android:id="@+id/tvCustomer"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Customer: Raj Sirsode"
+
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+
+            android:layout_marginTop="7dp" />
+
+
+        <TextView
+            android:id="@+id/tvPhone"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Phone: 9876543210"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Address: Customer Address"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvWater"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Normal Water × 1"
+
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+
+            android:layout_marginTop="8dp" />
+
+
+        <TextView
+            android:id="@+id/tvTotal"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Total: ₹25"
+
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#1976D2"
+
+            android:layout_marginTop="5dp" />
+
+
+        <TextView
+            android:id="@+id/tvPayment"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Payment: Cash (Cash Pending)"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvOrderType"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Order Type: Single"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvDate"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Date: 07 Oct 2026, 12:30 PM"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvDeliveryTime"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Delivery Time: Anytime"
+
+            android:textSize="14sp"
+            android:textColor="#555555"
+
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:id="@+id/tvStatus"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Status: Pending"
+
+            android:textSize="17sp"
+            android:textStyle="bold"
+
+            android:textColor="#F57C00"
+
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

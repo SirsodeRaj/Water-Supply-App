@@ -108,6 +108,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp" />
 
+    <!-- Admin Login -->
+    <TextView
+        android:id="@+id/tvAdminPortal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔐 Admin Portal"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#1976D2"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="18dp" />
+
     <TextView
         android:id="@+id/tvDeveloper"
         android:layout_width="wrap_content"

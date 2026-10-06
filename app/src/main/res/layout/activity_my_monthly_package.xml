@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- TOP BAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp"
+            android:background="#1976D2">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_revert"
+                android:contentDescription="Back"
+                android:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="My Monthly Package"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- LOADING -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:visibility="gone" />
+
+        <!-- NO PACKAGE -->
+        <LinearLayout
+            android:id="@+id/noPackageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="30dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Active Monthly Package"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:textColor="#222222"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="You don't have an active monthly water package."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnCreatePackage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="CREATE MONTHLY PACKAGE" />
+
+        </LinearLayout>
+
+        <!-- ACTIVE PACKAGE -->
+        <LinearLayout
+            android:id="@+id/packageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Active Monthly Package"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#222222" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <!-- WATER TYPE -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Water Type"
+                        android:textSize="13sp"
+                        android:textColor="#777777" />
+
+                    <TextView
+                        android:id="@+id/tvWaterType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cold Water"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginTop="3dp" />
+
+                    <!-- QUANTITY -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Quantity"
+                        android:textSize="13sp"
+                        android:textColor="#777777"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginTop="3dp" />
+
+                    <!-- PRICE -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Price Per Unit"
+                        android:textSize="13sp"
+                        android:textColor="#777777"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvPricePerUnit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="₹30"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginTop="3dp" />
+
+                    <!-- DAILY AMOUNT -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Amount"
+                        android:textSize="13sp"
+                        android:textColor="#777777"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvDailyAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="₹60"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1976D2"
+                        android:layout_marginTop="3dp" />
+
+                    <!-- DELIVERY -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delivery Time"
+                        android:textSize="13sp"
+                        android:textColor="#777777"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Anytime"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginTop="3dp" />
+
+                    <!-- STATUS -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Package Status"
+                        android:textSize="13sp"
+                        android:textColor="#777777"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvPackageStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Active"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:layout_marginTop="3dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- ESTIMATED BILL -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Estimated 30-Day Amount"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                    <TextView
+                        android:id="@+id/tvMonthlyAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="₹1800"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="#1976D2"
+                        android:layout_marginTop="5dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- FUTURE MANAGEMENT -->
+            <Button
+                android:id="@+id/btnManageDeliveryDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="MANAGE DELIVERY DAYS" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
